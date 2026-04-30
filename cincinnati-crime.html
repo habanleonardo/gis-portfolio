@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cincinnati Crime Density | Leonardo Haban</title>
+    <style>
+        :root { --bg-color: #000000; --text-primary: #f5f5f7; --text-secondary: #86868b; --highlight: #2997ff; --border-color: #333336; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-color); color: var(--text-primary); margin: 0; padding: 0; line-height: 1.6; }
+        nav { padding: 20px 40px; position: sticky; top: 0; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--border-color); }
+        nav a { color: var(--highlight); text-decoration: none; font-weight: 600; font-size: 1rem; transition: color 0.3s; }
+        nav a:hover { color: #ffffff; }
+        main { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+        header { text-align: center; margin-bottom: 80px; }
+        .status-tag { color: var(--highlight); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: inline-block; }
+        h1 { font-size: 3.5rem; margin: 0 0 20px 0; line-height: 1.1; letter-spacing: -0.02em; }
+        .subtitle { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+        section { margin-bottom: 60px; }
+        h2 { font-size: 2rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        p { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 20px; }
+        figure { margin: 60px 0; width: 100%; }
+        .map-container { width: 100%; aspect-ratio: 16 / 9; background-color: #111; display: flex; align-items: center; justify-content: center; border: 1px solid #222; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .map-container img { width: 100%; height: 100%; object-fit: contain; border: 1px solid var(--border-color); }
+        figcaption { text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: 15px; font-style: italic; }
+        .data-highlight { background-color: #111113; border-left: 4px solid var(--highlight); padding: 20px 30px; margin: 40px 0; border-radius: 0 8px 8px 0; }
+        .data-highlight p { margin: 0; color: var(--text-primary); font-weight: 500; }
+        footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); border-top: 1px solid var(--border-color); margin-top: 80px; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            h2 { font-size: 1.75rem; }
+            p { font-size: 1rem; }
+            .map-container { aspect-ratio: auto; height: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">&larr; Back to Portfolio</a>
+    </nav>
+    <main>
+        <header>
+            <div class="status-tag">Urban Analytics</div>
+            <h1>Cincinnati Crime Density</h1>
+            <p class="subtitle">An exploratory visual analytics approach examining socioeconomic correlations and localized income using Geographically Weighted Regression.</p>
+        </header>
+
+        <section>
+            <h2>The Problem: Boundary Bias in Criminology</h2>
+            <p>Urban criminology often relies on social disorganization theory to explain how socioeconomic disadvantages drive crime. However, traditional analyses utilizing standard census tracts artificially segregate demographics and bias statistical correlations.</p>
+            <p>To neutralize this boundary bias (the Modifiable Areal Unit Problem, or MAUP), I constructed a rigid, 250-meter equal-area resolution grid and clipped it precisely to the Cincinnati municipal boundary. I then utilized centroid-based spatial joins to execute an area-weighted interpolation, accurately distributing median household income into neutral grid cells.</p>
+        </section>
+
+        <figure>
+            <div class="map-container">
+                <img src="images/IC_intersect.jpg" alt="Income Disparity and Crime Density Intersections">
+            </div>
+            <figcaption>3x3 Quantile Bivariate Choropleth utilizing a 250m grid to neutralize MAUP, identifying geographic intersections of localized poverty and total crime density.</figcaption>
+        </figure>
+
+        <section>
+            <h2>Visual Analytics & Continuous Surface Modeling</h2>
+            <p>To establish the foundational footprint of criminal activity, I generated Kernel Density Estimation (KDE) surfaces. This continuous surface analysis transforms the localized incident points into highly visible regional epicenters, specifically highlighting the distribution of violent offenses across the city.</p>
+        </section>
+
+        <figure>
+            <div class="map-container">
+                <img src="images/Density_V.jpg" alt="Continuous Surface Analysis of Violent Crime Density Distribution">
+            </div>
+            <figcaption>Kernel Density Estimation (KDE) surface transforming localized violent incident points into regional epicenters.</figcaption>
+        </figure>
+
+        <section>
+            <h2>Geographically Weighted Regression (GWR)</h2>
+            <p>Initial global statistics calculated an identical -0.205 relationship for both violent and non-violent crimes against income. By applying a Spearman Rank correlation, I revealed the true divergent spatial relationships, confirming that violent crime is more deeply concentrated in lower-income areas, while property crime bleeds more heavily into wealthier transition zones.</p>
+            <p>To test for spatial non-stationarity, I executed a continuous Gaussian Geographically Weighted Regression. While the global Ordinary Least Squares model diagnostics yielded an Adjusted R² of 0.266, visualizing the Local R² output revealed extreme geographic variation.</p>
+            
+            <div class="data-highlight">
+                <p>The GWR model uncovered specific transition zones where the predictive power of income disparity escalates aggressively. In these highly sensitive pockets, median income accounts for 42.4% of the variance in violent crime.</p>
+            </div>
+        </section>
+
+        <figure>
+            <div class="map-container">
+                <img src="images/GWR_Violent.jpg" alt="Localized Sensitivity of Violent Crime Density to Median Household Income">
+            </div>
+            <figcaption>GWR Local R-Squared output highlighting extreme geographic variation in the predictive power of median household income on violent crime density.</figcaption>
+        </figure>
+
+        <section>
+            <h2>Conclusion</h2>
+            <p>By neutralizing MAUP and leveraging localized spatial regression, this analysis establishes that a singular global statistic is insufficient for modeling urban crime. Neighborhood-level income dynamics dictate vastly different outcomes across the geographical landscape.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Leonardo Haban | Spatial Data Analysis & GIS</p>
+    </footer>
+</body>
+</html>

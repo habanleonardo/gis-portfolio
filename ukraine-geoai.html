@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ukraine GeoAI Fallowing | Leonardo Haban</title>
+    <style>
+        :root { --bg-color: #000000; --text-primary: #f5f5f7; --text-secondary: #86868b; --highlight: #2997ff; --border-color: #333336; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-color); color: var(--text-primary); margin: 0; padding: 0; line-height: 1.6; }
+        nav { padding: 20px 40px; position: sticky; top: 0; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--border-color); }
+        nav a { color: var(--highlight); text-decoration: none; font-weight: 600; font-size: 1rem; transition: color 0.3s; }
+        nav a:hover { color: #ffffff; }
+        main { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+        header { text-align: center; margin-bottom: 80px; }
+        .status-tag { color: var(--highlight); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: inline-block; }
+        h1 { font-size: 3.5rem; margin: 0 0 20px 0; line-height: 1.1; letter-spacing: -0.02em; }
+        .subtitle { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+        section { margin-bottom: 60px; }
+        h2 { font-size: 2rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        p { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 20px; }
+        figure { margin: 60px 0; width: 100%; }
+        .map-container { width: 100%; aspect-ratio: 16 / 9; background-color: #111; display: flex; align-items: center; justify-content: center; border: 1px solid #222; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .map-container img { width: 100%; height: 100%; object-fit: contain; border: 1px solid var(--border-color); }
+        figcaption { text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: 15px; font-style: italic; }
+        .data-highlight { background-color: #111113; border-left: 4px solid var(--highlight); padding: 20px 30px; margin: 40px 0; border-radius: 0 8px 8px 0; }
+        .data-highlight p { margin: 0; color: var(--text-primary); font-weight: 500; }
+        footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); border-top: 1px solid var(--border-color); margin-top: 80px; }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            h2 { font-size: 1.75rem; }
+            p { font-size: 1rem; }
+            .map-container { aspect-ratio: auto; height: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">&larr; Back to Portfolio</a>
+    </nav>
+    <main>
+        <header>
+            <div class="status-tag">GeoAI Research</div>
+            <h1>Ecological Footprint of Kinetic Conflict</h1>
+            <p class="subtitle">Mapping physical surface degradation in the Ukrainian Chernozem belt using Sentinel-2 multispectral imagery and deep learning.</p>
+        </header>
+
+        <section>
+            <h2>Project Scope & Objective</h2>
+            <p>The ongoing conflict in Eastern Europe has caused unprecedented disruption to one of the world's most critical agricultural regions. While much reporting focuses on immediate geopolitical impacts, the long-term ecological scarring of the landscape remains difficult to quantify at scale. This project engineered an automated, deep-learning-driven spatial analysis pipeline to map and quantify kinetic surface damage across the front lines.</p>
+            <p>Measuring the environmental impact of warfare via remote sensing requires strict parameters. Early iterations of this research explored mapping invisible chemical toxicity. However, to ensure absolute scientific rigor, the project scope was deliberately refined. The primary objective was to train a neural network to exclusively identify undeniable, physical terrain degradation, separating kinetic conflict scars from all other land-cover types.</p>
+        </section>
+
+        <figure>
+            <div class="map-container">
+                <img src="images/AI-Outline.jpg" alt="AI-Detected Degradation overlaid on False Color Composite">
+            </div>
+            <figcaption>AI-detected degradation footprints overlaid on a False Color Infrared (CIR) composite. The deep red indicates high Near-Infrared (NIR) reflectance from healthy agricultural chlorophyll, contrasting sharply against the dead-earth voids of physical destruction.</figcaption>
+        </figure>
+
+        <section>
+            <h2>Methodology & Data Architecture</h2>
+            <p>The workflow required bridging traditional Geographic Information Systems (GIS) with advanced machine learning computer vision. The analysis utilized 20-meter resolution Sentinel-2 multispectral imagery, selecting a mid-summer temporal snapshot (July 2024 composite) to maximize the visual and spectral contrast between healthy vegetation and scorched earth.</p>
+            <p>The project utilized a U-Net semantic segmentation architecture with a ResNet50 backbone, processed via PyTorch on a local GPU environment. U-Net was chosen for its ability to evaluate imagery pixel-by-pixel, making it ideal for the organic, chaotic geometry of conflict zones.</p>
+            <p>To optimize model performance and ensure high spatial accuracy, the workflow was engineered around a strict Binary Classification (Non-Degraded vs. Kinetic Surface Damage) using Dense Block Labeling. By forcing edge-to-edge classification within training blocks, the model successfully isolated the spectral boundary between active agricultural chlorophyll and physical destruction.</p>
+        </section>
+
+        <figure>
+            <div class="map-container" style="aspect-ratio: auto; padding: 30px;">
+                <img src="images/DICE-Table.jpg" alt="Training Epoch Table showing Dice Coefficient" style="height: auto; width: 100%; max-width: 500px; border: 1px solid var(--border-color);">
+            </div>
+            <figcaption>Neural network training log across 24 epochs, demonstrating the stabilization of validation loss and the ascent of the Dice Coefficient.</figcaption>
+        </figure>
+
+        <section>
+            <h2>Results & Model Evaluation</h2>
+            <p>The binary spatial model yielded a highly robust and defensible algorithm.</p>
+            <div class="data-highlight">
+                <p>The final model achieved a sustained Dice Coefficient of ~0.80 (80%) alongside a stabilized validation loss curve. In the context of semantic segmentation for highly irregular, non-geometric environmental features, an 80% overlap represents a high degree of spatial accuracy.</p>
+            </div>
+            <p>When deployed across the regional July 2024 composite, the AI successfully generated a continuous vector footprint of physical degradation. The predicted destruction layer perfectly tracked the active front line, directly correlating with documented, high-density kinetic explosion data without generating significant false positives in non-combat zones.</p>
+        </section>
+
+        <figure>
+            <div class="map-container">
+                <img src="images/AI-Damage.jpg" alt="Explosion Density and AI-Detected Degradation">
+            </div>
+            <figcaption>Regional mapping comparing documented kinetic explosion density and assessed control lines against the autonomous AI-predicted surface damage layer.</figcaption>
+        </figure>
+
+        <section>
+            <h2>Geographic Implications & Conclusion</h2>
+            <p>The resulting spatial data provides a stark visualization of the conflict's physical footprint within the Chernozem soil belt—some of the most fertile agricultural land on Earth. The capacity to autonomously generate these degradation maps removes the bottleneck of manual, human-digitized damage assessments.</p>
+            <p>This methodology provides environmental scientists, agricultural economists, and post-conflict recovery agencies with a scalable tool to calculate the exact acreage of unworkable, physically destroyed land, allowing for more precise ecological remediation planning. By rigorously defining the scientific scope and adapting the data architecture to match the physical reality on the ground, this project proves neural networks can be trained to look past the noise of a landscape and accurately map the scars of human conflict.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Leonardo Haban | Spatial Data Analysis & GIS</p>
+    </footer>
+</body>
+</html>

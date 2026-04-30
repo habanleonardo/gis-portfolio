@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamilton County Stormwater | Leonardo Haban</title>
+    <style>
+        :root { --bg-color: #000000; --text-primary: #f5f5f7; --text-secondary: #86868b; --highlight: #2997ff; --border-color: #333336; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-color); color: var(--text-primary); margin: 0; padding: 0; line-height: 1.6; }
+        nav { padding: 20px 40px; position: sticky; top: 0; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--border-color); }
+        nav a { color: var(--highlight); text-decoration: none; font-weight: 600; font-size: 1rem; transition: color 0.3s; }
+        nav a:hover { color: #ffffff; }
+        main { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+        header { text-align: center; margin-bottom: 80px; }
+        .status-tag { color: var(--highlight); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: inline-block; }
+        h1 { font-size: 3.5rem; margin: 0 0 20px 0; line-height: 1.1; letter-spacing: -0.02em; }
+        .subtitle { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+        section { margin-bottom: 60px; }
+        h2 { font-size: 2rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        p { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 20px; }
+        figure { margin: 60px 0; width: 100%; }
+        .map-container { width: 100%; aspect-ratio: 16 / 9; background-color: #111; display: flex; align-items: center; justify-content: center; border: 1px solid #222; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .map-container img { width: 100%; height: 100%; object-fit: contain; border: 1px solid var(--border-color); }
+        figcaption { text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: 15px; font-style: italic; }
+        .data-highlight { background-color: #111113; border-left: 4px solid var(--highlight); padding: 20px 30px; margin: 40px 0; border-radius: 0 8px 8px 0; }
+        .data-highlight p { margin: 0; color: var(--text-primary); font-weight: 500; }
+        footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); border-top: 1px solid var(--border-color); margin-top: 80px; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            h2 { font-size: 1.75rem; }
+            p { font-size: 1rem; }
+            .map-container { aspect-ratio: auto; height: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">&larr; Back to Portfolio</a>
+    </nav>
+    <main>
+        <header>
+            <div class="status-tag">Environmental Modeling</div>
+            <h1>Hamilton Stormwater Runoff</h1>
+            <p class="subtitle">Assessing local topographical data to model stormwater flow and identify potential ecological vulnerabilities in Hamilton County, Ohio.</p>
+        </header>
+
+        <section>
+            <h2>The Problem: Urban Drainage Estimation</h2>
+            <p>Storm runoff is a primary driver of flooding and water-quality impairment in urbanizing watersheds because land-cover change replaces infiltrating surfaces with impervious cover. Engineers frequently estimate event-scale direct runoff using the Soil Conservation Service Curve Number (SCS-CN) method.</p>
+            <p>This project applies the SCS-CN method with a spatially distributed GIS implementation to estimate and compare storm runoff production and routing across major drainage areas within Hamilton County.</p>
+        </section>
+
+        <figure>
+            <div class="map-container">
+                <img src="images/CN.jpg" alt="Spatial Distribution of Curve Number">
+            </div>
+            <figcaption>Spatial distribution of curve number (CN) derived from NLCD land cover and SSURGO hydrologic soil groups.</figcaption>
+        </figure>
+
+        <section>
+            <h2>Hydrologic Modeling Methodology</h2>
+            <p>A countywide curve-number surface was developed by combining NLCD land-cover categories with SSURGO hydrologic soil groups. A 10-year 24‑hour design storm precipitation depth of 3.97 inches was retrieved from NOAA Atlas 14. Storm runoff depth was computed at the raster-cell scale using standard SCS-CN equations, including the calculation of potential maximum retention and initial abstraction.</p>
+            <p>Terrain-based runoff routing and subbasin delineation were performed using a USGS 10m DEM. The DEM was filled, a flow direction raster was computed using the D8 method, and flow accumulation was calculated to define runoff concentration pathways.</p>
+        </section>
+
+        <figure>
+            <div class="map-container">
+                <img src="images/HydrologicModeling.jpg" alt="DEM-Derived Drainage Structure">
+            </div>
+            <figcaption>DEM-derived drainage structure and modeled channel network used to support flow routing.</figcaption>
+        </figure>
+
+        <section>
+            <h2>Subbasin Comparison Results</h2>
+            <p>Watersheds were delineated to represent three dominant drainage exits: the Mill Creek system, the Great Miami-facing drainage area, and the Little Miami-facing drainage area. Subbasin runoff totals were computed by zonal summation of the runoff volume raster.</p>
+            <div class="data-highlight">
+                <p>The highly urbanized Mill Creek subbasin produced the highest total runoff volume (8.42 billion cubic feet) and the highest runoff intensity at 70.0 million ft³/sq mi. The other two basins showed lower intensity consistent with less continuous impervious cover.</p>
+            </div>
+        </section>
+
+        <figure>
+            <div class="map-container">
+                <img src="images/SubbasinRunoff.jpg" alt="Modeled Runoff Volume by Subbasin">
+            </div>
+            <figcaption>Modeled runoff volume by subbasin overlaid with runoff pathways toward the Ohio River corridor.</figcaption>
+        </figure>
+    </main>
+    <footer>
+        <p>&copy; 2026 Leonardo Haban | Spatial Data Analysis & GIS</p>
+    </footer>
+</body>
+</html>

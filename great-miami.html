@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Miami River Basin | Leonardo Haban</title>
+    <style>
+        :root { --bg-color: #000000; --text-primary: #f5f5f7; --text-secondary: #86868b; --highlight: #2997ff; --border-color: #333336; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-color); color: var(--text-primary); margin: 0; padding: 0; line-height: 1.6; }
+        nav { padding: 20px 40px; position: sticky; top: 0; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--border-color); }
+        nav a { color: var(--highlight); text-decoration: none; font-weight: 600; font-size: 1rem; transition: color 0.3s; }
+        nav a:hover { color: #ffffff; }
+        main { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+        header { text-align: center; margin-bottom: 80px; }
+        .status-tag { color: var(--highlight); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: inline-block; }
+        h1 { font-size: 3.5rem; margin: 0 0 20px 0; line-height: 1.1; letter-spacing: -0.02em; }
+        .subtitle { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+        section { margin-bottom: 60px; }
+        h2 { font-size: 2rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        p { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 20px; }
+        figure { margin: 60px 0; width: 100%; }
+        .map-container { width: 100%; aspect-ratio: 16 / 9; background-color: #111; display: flex; align-items: center; justify-content: center; border: 1px solid #222; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .map-container img { width: 100%; height: 100%; object-fit: contain; border: 1px solid var(--border-color); }
+        figcaption { text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: 15px; font-style: italic; }
+        .data-highlight { background-color: #111113; border-left: 4px solid var(--highlight); padding: 20px 30px; margin: 40px 0; border-radius: 0 8px 8px 0; }
+        .data-highlight p { margin: 0; color: var(--text-primary); font-weight: 500; }
+        footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); border-top: 1px solid var(--border-color); margin-top: 80px; }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            h2 { font-size: 1.75rem; }
+            p { font-size: 1rem; }
+            .map-container { aspect-ratio: auto; height: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">&larr; Back to Portfolio</a>
+    </nav>
+    <main>
+        <header>
+            <div class="status-tag">Agroeconomic Modeling</div>
+            <h1>Spatial Optimization vs. Constraints</h1>
+            <p class="subtitle">An agroeconomic crop suitability analysis of the Great Miami River Basin, balancing theoretical optimization with practical limitations.</p>
+        </header>
+
+        <section>
+            <h2>The Problem: Beyond Biophysical Evaluation</h2>
+            <p>Traditional land evaluation approaches have leaned heavily on single-variable or purely biophysical assessments—isolated soil indices or generalized climate envelopes—to decide where crops should go. However, real agricultural systems are shaped simultaneously by environmental capacity, commodity markets, and extensive structural pressures.</p>
+            <p>This project evaluates how corn, soybeans, and winter wheat might be spatially allocated across the Great Miami River Basin. The analysis transitions from a purely environmental framework, anchored by a Soil Suitability Index (SSI), toward an integrated agroeconomic approach (AgEcon).</p>
+        </section>
+
+        <figure>
+            <div class="map-container">
+                <img src="images/SSI.jpg" alt="Soil Suitability Index">
+            </div>
+            <figcaption>The baseline Soil Suitability Index (SSI) across the Great Miami River Basin.</figcaption>
+        </figure>
+
+        <section>
+            <h2>Geospatial Modeling Framework</h2>
+            <p>The GIS Agroeconomic Crop Suitability Model was standardized to a 30-meter spatial resolution, aligning the primary soil grid datasets with the USDA Cropland Data Layer (CDL). To introduce financial realism, I calculated resource burden layers, including Net Water Demand (NWD).</p>
+            <p>By integrating revenue metrics with a spatial cost penalty reflecting these resource burdens, the final AgEcon model combined environmental carrying capacity and net profitability at equal weight.</p>
+        </section>
+
+        <figure>
+            <div class="map-container">
+                <img src="images/OC_Agriecon.jpg" alt="Optimal Crop Based on Agroeconomic Model">
+            </div>
+            <figcaption>Optimal crop distribution incorporating both environmental carrying capacities and economic cost penalties.</figcaption>
+        </figure>
+
+        <section>
+            <h2>Spatial Mismatch Analysis</h2>
+            <p>To stress-test the theoretical models, outputs were compared directly against the empirical USDA CDL. The purely environmental SSI model matched observed conditions in only 9.7% of the study area, a mismatch rate of 90.3%.</p>
+            <div class="data-highlight">
+                <p>Applying the AgEcon model improved the match, but still resulted in an 81.6% spatial mismatch. This proves that farm-level decisions are not driven by pixel-level suitability optimization, but rather by structural constraints like subsurface tile drainage, federal crop insurance risk aversion, and technological lock-in.</p>
+            </div>
+        </section>
+
+        <figure>
+            <div class="map-container">
+                <img src="images/Mismatch_Agroecon.jpg" alt="Mismatch Between Current Crops and Agroeconomic Optimum">
+            </div>
+            <figcaption>Spatial mismatch between observed crop placement and the integrated AgEcon optimization model.</figcaption>
+        </figure>
+    </main>
+    <footer>
+        <p>&copy; 2026 Leonardo Haban | Spatial Data Analysis & GIS</p>
+    </footer>
+</body>
+</html>
